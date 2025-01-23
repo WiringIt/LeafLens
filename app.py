@@ -3,6 +3,7 @@ import pickle
 import gzip
 import numpy as np
 from PIL import Image
+import os
 
 # Load the compressed RandomForestClassifier model
 with gzip.open('rfc.pkl.gz', 'rb') as f:
@@ -10,8 +11,6 @@ with gzip.open('rfc.pkl.gz', 'rb') as f:
 
 # Creating the web app
 st.title('Forest Cover Type Prediction')
-image = Image.open('img.png')
-st.image(image, caption='Forest Cover Type', use_column_width=True)
 
 # Get user input for features
 user_input = st.text_input('Enter Features (comma-separated values)')
@@ -44,14 +43,18 @@ if user_input:
             cover_type_name = cover_type_info["name"]
             cover_type_image_path = cover_type_info["image"]
 
-            # Display cover type information
-            col1, col2 = st.columns([2, 3])
-            with col1:
-                st.write("Predicted Cover Type:")
-                st.write(f"<h1 style='font-size: 40px; font-weight: bold;'>{cover_type_name}</h1>", unsafe_allow_html=True)
-            with col2:
-                cover_type_image = Image.open(cover_type_image_path)
-                st.image(cover_type_image, caption=cover_type_name, use_column_width=True)
+            # Check if the specific cover type image exists
+            if os.path.exists(cover_type_image_path):
+                # Display cover type information
+                col1, col2 = st.columns([2, 3])
+                with col1:
+                    st.write("Predicted Cover Type:")
+                    st.write(f"<h1 style='font-size: 40px; font-weight: bold;'>{cover_type_name}</h1>", unsafe_allow_html=True)
+                with col2:
+                    cover_type_image = Image.open(cover_type_image_path)
+                    st.image(cover_type_image, caption=cover_type_name, use_column_width=True)
+            else:
+                st.error(f"Image for {cover_type_name} not found!")
         else:
             st.error("Unable to make a prediction. Cover type not found.")
     except ValueError:
