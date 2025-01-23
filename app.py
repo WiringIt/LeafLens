@@ -26,7 +26,7 @@ if user_input:
 
         # Define the cover type dictionary
         cover_type_dict = {
-            1: {"name": "Spruce/Fir", "image": "img_1.png"},
+            1: {"name": "Spruce/Fir", "image": "img_1.jpg"},
             2: {"name": "Lodgepole Pine", "image": "img_2.png"},
             3: {"name": "Ponderosa Pine", "image": "img_3.png"},
             4: {"name": "Cottonwood/Willow", "image": "img_4.png"},
