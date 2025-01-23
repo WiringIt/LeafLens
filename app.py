@@ -26,7 +26,7 @@ if user_input:
 
         # Define the cover type dictionary
         cover_type_dict = {
-            1: {"name": "Spruce/Fir", "image": "image_1.jpg"},
+            1: {"name": "Spruce/Fir", "image": "img_1.png"},
             2: {"name": "Lodgepole Pine", "image": "img_2.png"},
             3: {"name": "Ponderosa Pine", "image": "img_3.png"},
             4: {"name": "Cottonwood/Willow", "image": "img_4.png"},
@@ -52,7 +52,7 @@ if user_input:
                     st.write(f"<h1 style='font-size: 40px; font-weight: bold;'>{cover_type_name}</h1>", unsafe_allow_html=True)
                 with col2:
                     cover_type_image = Image.open(cover_type_image_path)
-                    st.image(cover_type_image, caption=cover_type_name, use_column_width=True)
+                    st.image(cover_type_image, caption=cover_type_name, use_container_width=True)
             else:
                 st.error(f"Image for {cover_type_name} not found!")
         else:
